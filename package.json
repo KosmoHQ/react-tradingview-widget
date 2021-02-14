@@ -21,7 +21,8 @@
     "release": "webpack --p --config webpack.config.babel.js",
     "test": "jest",
     "coverage": "jest --coverage",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "postinstall": "npm run build"
   },
   "peerDependencies": {
     "prop-types": "^15.6.0",
