@@ -22,7 +22,7 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "lint": "eslint ./src",
-    "postinstall": "npm run build"
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "prop-types": "^15.6.0",
