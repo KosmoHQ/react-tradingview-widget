@@ -17,7 +17,7 @@
     "tradingview widget react"
   ],
   "scripts": {
-    "build": "webpack --config webpack.config.babel.js",
+    "build": "babel src --out-file dist/index.js",
     "release": "webpack --p --config webpack.config.babel.js",
     "test": "jest",
     "coverage": "jest --coverage",
@@ -29,6 +29,11 @@
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.16",
+    "@babel/core": "^7.12.16",
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/preset-env": "^7.12.16",
+    "@babel/preset-react": "^7.12.13",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-jest": "^22.1.0",
