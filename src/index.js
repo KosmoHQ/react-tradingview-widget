@@ -11,22 +11,22 @@ export const BarStyles = {
   RENKO: '4',
   LINE_BREAK: '7',
   KAGI: '5',
-  POINT_AND_FIGURE: '6'
+  POINT_AND_FIGURE: '6',
 };
 
 export const IntervalTypes = {
   D: 'D',
-  W: 'W'
+  W: 'W',
 };
 
 export const RangeTypes = {
   YTD: 'ytd',
-  ALL: 'all'
+  ALL: 'all',
 };
 
 export const Themes = {
   LIGHT: 'Light',
-  DARK: 'Dark'
+  DARK: 'Dark',
 };
 
 const SCRIPT_ID = 'tradingview-widget-script';
@@ -63,7 +63,7 @@ export default class TradingViewWidget extends PureComponent {
       '120',
       '180',
       IntervalTypes.D,
-      IntervalTypes.W
+      IntervalTypes.W,
     ]),
     locale: PropTypes.string,
     news: PropTypes.arrayOf(PropTypes.string),
@@ -79,7 +79,7 @@ export default class TradingViewWidget extends PureComponent {
       RangeTypes.YTD,
       '12m',
       '60m',
-      RangeTypes.ALL
+      RangeTypes.ALL,
     ]),
     referral_id: PropTypes.string,
     save_image: PropTypes.bool,
@@ -95,7 +95,7 @@ export default class TradingViewWidget extends PureComponent {
       BarStyles.RENKO,
       BarStyles.LINE_BREAK,
       BarStyles.KAGI,
-      BarStyles.POINT_AND_FIGURE
+      BarStyles.POINT_AND_FIGURE,
     ]),
     symbol: PropTypes.string.isRequired,
     theme: PropTypes.oneOf([Themes.LIGHT, Themes.DARK]),
@@ -104,7 +104,7 @@ export default class TradingViewWidget extends PureComponent {
     watchlist: PropTypes.arrayOf(PropTypes.string),
     widgetType: PropTypes.string,
     width: PropTypes.number,
-    withdateranges: PropTypes.bool
+    withdateranges: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -126,7 +126,7 @@ export default class TradingViewWidget extends PureComponent {
     toolbar_bg: '#F1F3F6',
     widgetType: 'widget',
     width: 980,
-    withdateranges: false
+    withdateranges: false,
   };
 
   containerId = `${CONTAINER_ID}-${Math.random()}`;
@@ -138,11 +138,12 @@ export default class TradingViewWidget extends PureComponent {
     this.initWidget();
   };
 
-  canUseDOM = () => !!(
-    typeof window !== 'undefined' &&
-    window.document &&
-    window.document.createElement
-  );
+  canUseDOM = () =>
+    !!(
+      typeof window !== 'undefined' &&
+      window.document &&
+      window.document.createElement
+    );
 
   appendScript = (onload) => {
     if (!this.canUseDOM()) {
@@ -168,24 +169,26 @@ export default class TradingViewWidget extends PureComponent {
     document.getElementsByTagName('head')[0].appendChild(script);
   };
 
-  getScriptElement = () =>
-    document.getElementById(SCRIPT_ID);
+  getScriptElement = () => document.getElementById(SCRIPT_ID);
 
-  scriptExists = () =>
-    this.getScriptElement() !== null;
+  scriptExists = () => this.getScriptElement() !== null;
 
   updateOnloadListener = (onload) => {
     const script = this.getScriptElement();
     const oldOnload = script.onload;
-    return script.onload = () => {
+    return (script.onload = () => {
       oldOnload();
       onload();
-    };
+    });
   };
 
   initWidget = () => {
     /* global TradingView */
-    if (typeof TradingView === 'undefined' || !document.getElementById(this.containerId)) return;
+    if (
+      typeof TradingView === 'undefined' ||
+      !document.getElementById(this.containerId)
+    )
+      return;
 
     const { widgetType, ...widgetConfig } = this.props;
     const config = { ...widgetConfig, container_id: this.containerId };
@@ -220,9 +223,9 @@ export default class TradingViewWidget extends PureComponent {
     if (!this.props.autosize) return {};
     return {
       width: '100%',
-      height: '100%'
+      height: '100%',
     };
   };
 
-  render = () => <article id={this.containerId} style={this.getStyle()} />
+  render = () => <article id={this.containerId} style={this.getStyle()} />;
 }
