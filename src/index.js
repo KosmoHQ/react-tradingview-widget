@@ -34,6 +34,7 @@ const CONTAINER_ID = 'tradingview-widget';
 
 export default class TradingViewWidget extends PureComponent {
   static propTypes = {
+    subscribe_to_quote: PropTypes.func,
     allow_symbol_change: PropTypes.bool,
     autosize: PropTypes.bool,
     calendar: PropTypes.bool,
@@ -211,7 +212,11 @@ export default class TradingViewWidget extends PureComponent {
     }
 
     /* global TradingView */
-    new TradingView[widgetType](config);
+    this.tradingView = new TradingView[widgetType](config);
+
+    if (typeof config.subscribe_to_quote == 'function') {
+      this.tradingView.subscribeToQuote(config.subscribe_to_quote);
+    }
   };
 
   cleanWidget = () => {
